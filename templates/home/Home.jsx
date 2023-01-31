@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Web3 from "web3";
 
-import StackToken from "../../abis/StackToken.json";
-import RewardsToken from "../../abis/RewardsToken.json";
-import DefiToken from "../../abis/DefiToken.json";
+import StackToken from "../../build/contracts/StackToken.json";
+import RewardsToken from "../../build/contracts/RewardsToken.json";
+import DefiToken from "../../build/contracts/DefiToken.json";
 
 import { CardComponent } from "../../components/card/Card";
 import styles from "./Home.module.css";
