@@ -27,10 +27,9 @@ export const HomeTemplate = () => {
     if (window.ethereum) {
       window.web3 = new Web3(ethereum);
       await window.ethereum.enable();
-      const accounts = await window.ethereum.request({
+      await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      setAccount(accounts[0]);
     } else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
     } else {
@@ -41,6 +40,7 @@ export const HomeTemplate = () => {
   async function loadBlockchainData() {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
+    setAccount(accounts[0]);
 
     const networkId = await web3.eth.net.getId();
 
@@ -55,7 +55,7 @@ export const HomeTemplate = () => {
       const stackingTokenBalance = await stackingTokenC.methods
         .balanceOf(accounts[0])
         .call();
-      setStackingTokenBalance(stackingTokenBalance);
+      setStackingTokenBalance(stackingTokenBalance.toString());
     }
 
     const rewardsTokenData = RewardsToken.networks[networkId];
@@ -68,7 +68,7 @@ export const HomeTemplate = () => {
       const rewardsTokenBalance = await rewardsTokenC.methods
         .balanceOf(accounts[0])
         .call();
-      setRewardsTokenBalance(rewardsTokenBalance);
+      setRewardsTokenBalance(rewardsTokenBalance.toString());
     }
 
     const defiTokenData = DefiToken.networks[networkId];
@@ -81,7 +81,7 @@ export const HomeTemplate = () => {
       const defiTokenBalance = await defiTokenC.methods
         .stakingBalance(accounts[0])
         .call();
-      setDefiTokenBalance(defiTokenBalance);
+      setDefiTokenBalance(defiTokenBalance.toString());
     }
   }
 

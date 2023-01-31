@@ -10,11 +10,11 @@ module.exports = async function (deployer, network, accounts) {
   const rewardsToken = await RewardsToken.deployed();
 
   await deployer.deploy(DefiToken, stackToken.address, rewardsToken.address);
-  const defiToken = await RewardsToken.deployed();
+  const defiToken = await DefiToken.deployed();
 
   // Transferrir Rewards token a DefiToken
-  rewardsToken.transfer(defiToken.address, "1000000000000000000000000");
+  await rewardsToken.transfer(defiToken.address, "1000000000000000000000000");
 
   // Transferrir Stacking token a DefiToken
-  stackToken.transfer(accounts[1], "100000000000000000000");
+  await stackToken.transfer(accounts[1], "100000000000000000000");
 };

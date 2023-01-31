@@ -30,7 +30,6 @@ export const CardComponent = ({
   handleUnstakeTokens,
 }) => {
   const [valueStake, setValueStake] = useState(1);
-  console.log(balance);
   const isBrowser = () => typeof window !== "undefined" && window.web3.utils;
 
   return (
@@ -48,7 +47,6 @@ export const CardComponent = ({
             <FormControl>
               <FormLabel>Stake Tokens</FormLabel>
               <NumberInput
-                max={50}
                 min={1}
                 value={valueStake}
                 onChange={(value) => setValueStake(value)}
@@ -59,15 +57,13 @@ export const CardComponent = ({
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
-              {title === "Stacking" && (
-                <Stack mt="2">
-                  {isBrowser() && (
-                    <Text fontSize="lg">
-                      Balance: {window.web3.utils.fromWei(balance, "Ether")}
-                    </Text>
-                  )}
-                </Stack>
-              )}
+              <Stack mt="2">
+                {isBrowser() && (
+                  <Text fontSize="lg">
+                    Balance: {window.web3.utils.fromWei(balance, "Ether")}
+                  </Text>
+                )}
+              </Stack>
             </FormControl>
           )}
         </Stack>
@@ -82,6 +78,13 @@ export const CardComponent = ({
           >
             {title === "Stacking" ? textBtn : "Get Rewards"}
           </Button>
+          <Stack mt="2">
+            {title !== "Stacking" && isBrowser() && (
+              <Text fontSize="lg">
+                Balance: {window.web3.utils.fromWei(balance, "Ether")}
+              </Text>
+            )}
+          </Stack>
 
           {title === "Stacking" && (
             <Button
